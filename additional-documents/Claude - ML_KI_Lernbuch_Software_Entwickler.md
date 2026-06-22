@@ -255,16 +255,16 @@ model = LogisticRegression(class_weight="balanced")
 | **Overfitting** | Modell merkt sich Trainingsdaten inkl. Rauschen (hohe Varianz) | sehr gute Performance auf Training, schlechte auf Test |
 | **Gute Generalisierung** | Modell erfasst die zugrunde liegende Struktur | ähnlich gute Performance auf Training und Test |
 
+```mermaid
+xychart-beta
+    title "Fehler in Abhängigkeit der Modellkomplexität"
+    x-axis "Modellkomplexitaet (niedrig --> hoch)" [1, 2, 3, 4, 5, 6, 7, 8]
+    y-axis "Fehler" 0 --> 10
+    line [9.5, 7.0, 5.0, 3.5, 2.5, 1.8, 1.2, 0.8]
+    line [9.8, 7.2, 5.3, 4.0, 3.8, 4.5, 6.0, 8.0]
 ```
-Fehler
-  │
-  │  Trainingsfehler ──────╮
-  │                         ╰──────────────
-  │  Testfehler  ╲                 ╭────── (Overfitting-Bereich)
-  │                ╲_______╱
-  │                (Optimum)
-  └──────────────────────────────────────→ Modellkomplexität
-```
+
+*Untere, stetig fallende Kurve = **Trainingsfehler**. U‑förmige Kurve = **Testfehler**. Links vom Minimum liegt **Underfitting** (beide Fehler hoch), das Minimum des Testfehlers ist das **Optimum**, rechts davon beginnt der **Overfitting‑Bereich** (Trainingsfehler sinkt weiter, Testfehler steigt).*
 
 Analogie für Entwickler: Underfitting ist wie ein zu generischer Algorithmus, der Spezialfälle ignoriert. Overfitting ist wie Code, der hart auf Testdaten zugeschnitten ist ("hardcoded für die Unit-Tests") und in Produktion versagt.
 
@@ -959,19 +959,14 @@ Beim Vorstellen eigener Modellergebnisse (z. B. im Team oder Workshop-Kontext) e
 
 ## Zusammenfassung: Der rote Faden des Buches
 
-```
-Paradigma wählen (Teil 1)
-        │
-        ▼
-KI-Vorgehensmodell anwenden (Teil 2):
-  Modellwahl → Training/Resampling → Evaluation → Tuning
-        │
-        ▼
-Auf Business-Szenario anwenden (Teil 3):
-  Regression │ Klassifikation │ Clustering │ Recommender │ RL
-        │
-        ▼
-Selbst durchführen & kritisch bewerten (Teil 4)
+```mermaid
+flowchart TD
+    T1["<b>Teil 1</b><br/>Paradigma wählen"]
+    T2["<b>Teil 2 - KI-Vorgehensmodell anwenden</b><br/>Modellwahl --> Training/Resampling --> Evaluation --> Tuning"]
+    T3["<b>Teil 3 - Auf Business-Szenario anwenden</b><br/>Regression | Klassifikation | Clustering | Recommender | RL"]
+    T4["<b>Teil 4</b><br/>Selbst durchführen & kritisch bewerten"]
+
+    T1 --> T2 --> T3 --> T4
 ```
 
 Dieses Lernbuch ist als Referenz gedacht: Kapitel 3 (Algorithmen-Katalog) und Kapitel 5.2 (Entscheidungsbaum zur Modellwahl) eignen sich als Quick-Reference für künftige eigene Projekte; Teil 3 als Code-Vorlagen-Sammlung für die fünf häufigsten Business-Szenarien.
