@@ -118,18 +118,18 @@ Diese Heuristik wird in Kapitel 5 ("Modellwahl") systematisiert.
 
 Analog zu einem Software-Lifecycle nutzen wir ein iteratives Vorgehensmodell (angelehnt an CRISP-DM, vereinfacht für die Entwickler-Praxis):
 
-```
- ┌─────────────────┐     ┌──────────────────┐     ┌──────────────────┐
- │ 1. Problem &     │ →   │ 2. Daten          │ →   │ 3. Modellwahl     │
- │   Zielmetrik      │     │   verstehen/      │     │   (Algorithmus)   │
- │   definieren      │     │   vorbereiten      │     │                   │
- └─────────────────┘     └──────────────────┘     └──────────────────┘
-          ↑                                                  │
-          │                                                  ▼
- ┌─────────────────┐     ┌──────────────────┐     ┌──────────────────┐
- │ 6. Deployment &  │ ←   │ 5. Evaluation     │ ←   │ 4. Training       │
- │   Monitoring      │     │   & Tuning         │     │   (inkl. Resampling)│
- └─────────────────┘     └──────────────────┘     └──────────────────┘
+```mermaid
+flowchart LR
+    S1["1. Problem &<br/>Zielmetrik<br/>definieren"]
+    S2["2. Daten<br/>verstehen/<br/>vorbereiten"]
+    S3["3. Modellwahl<br/>(Algorithmus)"]
+    S4["4. Training<br/>(inkl. Resampling)"]
+    S5["5. Evaluation<br/>& Tuning"]
+    S6["6. Deployment &<br/>Monitoring"]
+
+    S1 --> S2 --> S3 --> S4 --> S5 --> S6
+    S5 -. "Iteration" .-> S3
+    S6 -. "Feedback" .-> S1
 ```
 
 Wichtig: Das ist **kein** linearer Wasserfall. Schritte 3–5 werden typischerweise mehrfach durchlaufen (Iteration), bis die Zielmetrik aus Schritt 1 erreicht ist.
